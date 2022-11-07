@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>riddles webpage</title>
+    <style>
+        body{
+            background-color:antiquewhite;
+            font-family:Georgia, 'Times New Roman', Times, serif;
+            font-size: medium;
+            color:darkslategrey;
+        }
+        #container{
+            width:970px;
+            padding:10px;
+        }
+        h1{
+            width:950px;
+            padding:10px;
+            text-align: center;
+            background-color: darkseagreen;
+            border: 3px solid purple;
+            color:darkslategray;
+        }
+        .sections{
+            width:950px;
+            padding:10px;
+            background-color: purple;
+            text-align: left;
+            color:gainsboro;
+        }
+        img{
+            border: 5px solid darkseagreen;
+        }
+    </style>
+</head>
+<body>
+    <div id="container">
+        
+        <h1>Welcome to the HTML JavaScript Riddles Page</h1>
+        <div class="nav-bar">
+            <a href="index.html" class="btn">Home</a> <a href="riddles.html" class="btn">Riddles</a>
+        </div>
+    <ol>
+        <li>
+            <p>A girl fell from a 20 foot ladder, she wasn't hurt, how?</p>
+            <br>
+            <p onclick="showAnswer('answer','she fell off the second step')" id="answer">answer</p>
+            <br>
+        </li>
+        <li>
+           <p>You're in a race and pass the person in Second, what place are you in?</p>
+           <br>
+           <p onclick="showAnswer('answer2','second place!')" id="answer2">answer</p>
+           <br>
+        </li>
+        <li>
+            <p>What four letter word can be read forward, backward, or upside down and can still be read from left to right?</p>
+            <br>
+            <p>N-O-O-N!</p>
+            <br>
+        </li>
+        <li>
+            <p>What is at the end of the rainbow?</p>
+            <br>
+            <p>The letter W!</p>
+            <br>
+        </li>
+        <li>
+            <p>Two people were playing chess and both won, how is this possible?</p>
+            <br>
+            <p>They were playing two seperate games!</p>
+            <br>
+        </li>
+        <li>
+            <p>What invention lets you look through a wall?</p>
+            <br>
+            <p>A window!</p>
+            <br>   
+        </li>
+        <li>
+            <p>What two words added together contain the most letters?</p>
+            <br>
+            <p>Post Office!</p>
+            <br>
+        </li>
+        <li>
+            <p>I have 13 hearts but no arms and no stomach, what am I?</p>
+            <br>
+            <p>A deck of cards!</p>
+            <br>
+        </li>
+        <li>
+            <p>I'm easy to lift but hard to throw what am I?</p>
+            <br>
+            <p>A feather!</p>
+            <br>
+        </li>
+        <li>
+            <p>What color is the wind?</p>
+            <br>
+            <p>Blew!</p>
+            <br>
+        </li>
+    </ol>
+    <script src="riddles.js"></script>
+        <p>&copy; 2022 HTML/JavaScript Class</p>
+    </div>
+</body>
+</html>
