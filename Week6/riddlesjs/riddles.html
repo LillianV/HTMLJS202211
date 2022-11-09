@@ -5,10 +5,18 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>riddles webpage</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Geostar+Fill&display=swap" rel="stylesheet">
     <style>
+       
+       @font-face {
+            font-family:holocene;
+            src: url(fonts/KGHolocene.ttf);
+        }
         body{
             background-color:antiquewhite;
-            font-family:Georgia, 'Times New Roman', Times, serif;
+            font-family: holocene;
             font-size: medium;
             color:darkslategrey;
         }
@@ -47,13 +55,15 @@
         <li>
             <p>A girl fell from a 20 foot ladder, she wasn't hurt, how?</p>
             <br>
-            <p onclick="showAnswer('answer','she fell off the second step')" id="answer">answer</p>
+            <button onclick="showAnswer('answer','she fell off the second step')">Click for answer</button>
+            <span id="answer"></span>
             <br>
         </li>
         <li>
            <p>You're in a race and pass the person in Second, what place are you in?</p>
            <br>
-           <p onclick="showAnswer('answer2','second place!')" id="answer2">answer</p>
+           <button onclick="showAnswer('answer2','second place!')">Click for answer</button>
+           <span  id="answer2"></span>
            <br>
         </li>
         <li>
