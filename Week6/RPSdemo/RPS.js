@@ -18,15 +18,18 @@ var rps = ["rock", "paper", "scissors"];
 //console.log(rps[0]);
 
 document.getElementById("rock").addEventListener('click', function (e) {
-    alert("You picked " + rps[0]);
+    ctx.fillText("You picked " + rps[0], 125,280);
+    ctx.clearRect(0,0,1000,1000);
     playGame(rps[0]);
 });
 document.getElementById("paper").addEventListener('click', function (e) {
-    alert("You picked " + rps[1]);
+    ctx.fillText("You picked paper", 125,280);
+    ctx.clearRect(0,0,1000,1000);
     playGame(rps[1]);
 });
 document.getElementById("scissors").addEventListener('click', function (e) {
-    alert("You picked " + rps[2]);
+    ctx.fillText("You picked scissors",125,280);
+    ctx.clearRect(0,0,1000,1000);
     playGame(rps[2]);
 });
 
@@ -58,7 +61,7 @@ function playGame(playerChoice) {
             }
             else if (cpuChoice == 1) {
                 //paper
-                ctx.fillText("Cpu chose pape. It's a tie", 125, 280);
+                ctx.fillText("Cpu chose paper. It's a tie", 125, 280);
             }
             else {
                 //scissors
