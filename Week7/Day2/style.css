@@ -1,13 +1,13 @@
 html,body{
     display: flex;
     justify-content: center;
+    background-color: darkslategray;
 }
 canvas{
     border: 1px solid black;
 }
 #container{
     justify-content: center;
-    background-image:url("images/background1.webp");
     text-align: center;
 }
 #nav{

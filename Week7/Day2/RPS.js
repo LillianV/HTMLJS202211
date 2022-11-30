@@ -12,7 +12,12 @@ var htoad = new Image();
 var hmario = new Image();
 
 var bg = new Image();
+var bg2 = new Image();
 
+var startHealth = 5;
+var health = startHealth;
+var healthBarWidth = 100;
+var gameOver = true;
 
 bowser.src = "images/bowser.png";
 peach.src = "images/peach.png";
@@ -25,6 +30,7 @@ htoad.src = "images/toad2.gif";
 hmario.src = "images/mario2.gif";
 
 bg.src = "images/background1.webp";
+bg2.src = "images/background2.jpg"
 
 
 bg.onload = function(){
@@ -47,20 +53,31 @@ function onKeyUp(e){
         draw(bowser,peach,toad,mario,bowser,peach,toad,mario);
     }
 }
+function keyPressDown(e){
+    if(e.keyCode == 32 && gameOver){
+        gameOver = false;
+    }
+    if(health<=0){
+        //restart game
+        restartGame();
+    }
+}
+function restartGame(){
+    location.reload();
+}
 
 function draw(bowser,peach,toad,mario,cbowser,cpeach,ctoad,cmario){
     if(gameOver == true){
         //drawing the font
-        ctx.font = "40px New Times Roman";
+    ctx.drawImage(bg,0,0, canvas.width,canvas.height);
+    ctx.font = "40px New Times Roman";
     ctx.fillStyle = "black";
-    ctx.strokeStyle = "aliceblue";
+    ctx.strokeStyle = "green";
     ctx.textAlign = "center"
-    ctx.fillText("Welcome to Super Mario Speedrun!", canvas.width/2, 100);
-    ctx.fillText("press space to start", canvas.width/2, 150);
-    ctx.strokeText("Welcome to Super Mario Speedrun!", canvas.width/2, 100);
-    bg.onload = function(){
-        ctx.drawImage(background,0,0);
-    }
+    ctx.fillText("Welcome to Super Mario Speedrun!", canvas.width/2, 300);
+    ctx.fillText("press space to start", canvas.width/2, 350);
+    ctx.strokeText("Welcome to Super Mario Speedrun!", canvas.width/2, 300);
+    
     }
     else{
 
@@ -69,22 +86,36 @@ function draw(bowser,peach,toad,mario,cbowser,cpeach,ctoad,cmario){
         ctx.font = "30px New Times Roman";
         ctx.textAlign = "center";
         ctx.fillStyle = "aliceblue";
+        
+        ctx.drawImage(bg2,0,0,canvas.width,canvas.width);
         ctx.fillText("Player Choice", canvas.width/2, 100);
         ctx.drawImage(bowser, canvas.width/2-100-bowser.width/2, 150);
         ctx.drawImage(peach, canvas.width/2 -peach.width/2, 150);
         ctx.drawImage(toad, canvas.width/2+100-toad.width/2, 150);
-        ctx.drawImage(mario, canvas.width/2+100-mario.width/2, 150);
+        ctx.drawImage(mario, canvas.width/2+200-mario.width/2, 150);
         //cpu choices
         ctx.fillText("Cpu Choice", canvas.width/2, 325);
         ctx.drawImage(cbowser, canvas.width/2-100-cbowser.width/2, 375);
         ctx.drawImage(cpeach, canvas.width/2-cpeach.width/2, 372);
         ctx.drawImage(ctoad, canvas.width/2+100-ctoad.width/2, 375);
-        ctx.drawImage(cmario, canvas.width/2+100-cmario.width/2, 375);
+        ctx.drawImage(cmario, canvas.width/2+200-cmario.width/2, 375);
 
         ctx.fillText(results, canvas.width/2, 475);
         ctx.restore();
     }
 
+}
+
+function drawHealthBar(){
+    var currentBarWidth = healthBarWidth * (health/startHealth);
+    ctx.fillStyle = "black";
+    ctx.fillRect(50, 30, healthBarWidth, 10);
+    ctx.font = "25px New Times Roman";
+    ctx.fillText("Health", 50,25);
+    if(health>0){
+        ctx.fillStyle = "red";
+        ctx.fillRect(50,30,currentBarWidth,10);
+    }
 }
 
 //alert("select rock, paper or scissors");
@@ -118,7 +149,7 @@ function playGame(playerChoice) {
     }else{
         var cpuChoice = Math.floor(Math.random() * 3.99);
     console.log(cpuChoice, playerChoice);
-
+       // drawHealthBar();
     switch (playerChoice) {
         case "bowser":
             if (cpuChoice == 0) {
@@ -133,18 +164,18 @@ function playGame(playerChoice) {
                 results = "Cpu chose Peach. You lose";
                 draw(hbowser,peach,toad,mario,bowser,hpeach,toad,mario);
             }
-            else {
+            else if(cpuChoice == 2) {
                 //scissors
                // ctx.fillText("Cpu chose scissors. You win", canvas.width/2, 280);
                 results = "Cpu chose Toad. You win";
                 draw(hbowser,peach,toad,mario,bowser,peach,htoad,mario);
             }
-            /*else(cpuChoice == 3){
+            else {
                 //scissors
                // ctx.fillText("Cpu chose scissors. You win", canvas.width/2, 280);
                 results = "Cpu chose Mario. You lose";
                 draw(hbowser,peach,toad,mario,bowser,peach,toad,hmario);
-            }*/
+            }
             break;
 
 
@@ -161,11 +192,17 @@ function playGame(playerChoice) {
                 results = "Cpu chose Peach. It's a tie";
                 draw(bowser,hpeach,toad,bowser,hpeach,toad,mario);
             }
-            else {
+            else if (cpuChoice == 2){
                 //scissors
                // ctx.fillText("Cpu chose scissors. You lose", canvas.width/2, 280);
                 results = "Cpu chose Toad. You lose";
                 draw(bowser,hpeach,toad,bowser,peach,htoad,mario);
+            }
+            else{
+                //scissors
+               // ctx.fillText("Cpu chose scissors. You win", canvas.width/2, 280);
+                results = "Cpu chose Mario. You win";
+                draw(bowser,hpeach,toad,mario,bowser,peach,toad,hmario);
             }
             break;
 
@@ -182,11 +219,17 @@ function playGame(playerChoice) {
                 results = "Cpu chose Peach. You win";
                 draw(bowser,peach,htoad,bowser,hpeach,toad,mario);
             }
-            else {
+            else if(cpuChoice == 2){
                 //scissors
                // ctx.fillText("Cpu chose scissors. It's a tie", canvas.width/2, 280);
                 results = "Cpu chose Toad. It's a tie";
                 draw(bowser,peach,htoad,bowser,peach,htoad,mario);
+            }
+            else {
+                //water
+               // ctx.fillText("Cpu chose scissors. You lose", canvas.width/2, 280);
+                results = "Cpu chose Mario. You lose";
+                draw(bowser,peach,htoad,bowser,peach,toad,hmario);
             }
             break;
 
@@ -194,7 +237,7 @@ function playGame(playerChoice) {
             if (cpuChoice == 0) {
                         //rock
                         //ctx.fillText("Cpu chose rock. It's a tie", canvas.width/2, 280);
-                        results = "Cpu chose Bowser. It's a tie";
+                        results = "Cpu chose Bowser. You win";
                         draw(bowser,peach,toad,hmario,hbowser,peach,toad,mario);
                     }
                     else if (cpuChoice == 1) {
@@ -203,18 +246,18 @@ function playGame(playerChoice) {
                         results = "Cpu chose Peach. You lose";
                         draw(bowser,peach,toad,hmario,bowser,hpeach,toad,mario);
                     }
-                    else {
+                    else if(cpuChoice == 2){
                         //scissors
                        // ctx.fillText("Cpu chose scissors. You win", canvas.width/2, 280);
                         results = "Cpu chose Toad. You win";
                         draw(bowser,peach,toad,hmario,bowser,peach,htoad,mario);
                     }
-                    /*else(cpuChoice == 3){
+                    else{
                         //scissors
                        // ctx.fillText("Cpu chose scissors. You win", canvas.width/2, 280);
                         results = "Cpu chose Mario. It's a tie";
                         draw(hbowser,peach,toad,mario,bowser,peach,toad,hmario);
-                    }*/
+                    }
                     break;
     }
     }
