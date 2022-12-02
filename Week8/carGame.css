@@ -1,0 +1,10 @@
+html,body{
+    display: flex;
+    justify-content: center;
+    color:aliceblue;
+    
+}
+canvas{
+    border: 1px solid black;
+    background-image: url("images/mushroomBackground.jpg");
+}

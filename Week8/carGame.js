@@ -3,11 +3,12 @@ var ctx = canvas.getContext("2d");
 
 var timer = requestAnimationFrame(main);
 var toad = new Image();
+var shades = new Image();
 var start = 58;
 var finish = 956;
 var carPos = 2;
 var speed = 3;
-var carWidth = 60
+var carWidth = 90
 
 var startFuel = randomNumber(canvas.width, 600);
 var fuel = startFuel;
@@ -21,13 +22,14 @@ var frames = fps;
 //load game sprites
 
 var carSprite = new Image();
-carSprite.src = "images/carSprite.png";
+carSprite.src = "images/mushroomCar.png";
 
 carSprite.onload = function(){
     main();
 }
 
 toad.src = "images/AngryGreenToad.png";
+shades.src = "images/toadShades.webp";
 
 //add some event listeners
 
@@ -46,7 +48,7 @@ function keyPressDown(e){
 function main(){
     ctx.clearRect(0,0,canvas.width,canvas.height);
     if(gameOver){
-        ctx.fillStyle = "black";
+        ctx.fillStyle = "aliceblue";
         ctx.font = "30px New Times Roman";
         ctx.textAlign = "center";
         ctx.fillText("Press Space to start", canvas.width/2,canvas.height/2);
@@ -75,24 +77,25 @@ function main(){
 }
 
 function drawStartFinish(){
-    ctx.fillStyle = "black";
+    ctx.fillStyle = "aliceblue";
     //start line
-    ctx.fillRect(start, 50, 10,500);
+    ctx.fillRect(start, 100, 10,500);
     //finish line
-    ctx.fillRect(finish, 50, 10,500);
+    ctx.fillRect(finish, 100, 10,500);
 }
 
 function drawCar(){
     //car (:
     /*ctx.fillStyle = "purple";
     ctx.fillRect(carPos,canvas.height/2,40,20);*/
-    ctx.drawImage(carSprite,carPos,canvas.height/2,carWidth,40);
+    ctx.drawImage(carSprite,carPos,canvas.height/2,carWidth,80);
 }
 
 function drawFuelBar(){
     var currentBarWidth = fuelBarWidth * (fuel/startFuel);
-    ctx.fillStyle = "black";
+    ctx.fillStyle = "red";
     ctx.fillRect(start, 30, fuelBarWidth, 10);
+    ctx.fillStyle = "aliceblue";
     ctx.font = "25px New Times Roman";
     ctx.fillText("Fuel", start,25);
     if(fuel>0){
@@ -103,16 +106,18 @@ function drawFuelBar(){
 
 function drawResults(){
     if(carPos + carWidth > finish){
-        ctx.fillStyle = "black";
+        ctx.fillStyle = "aliceblue";
         ctx.font = "25px New Times Roman";
         ctx.textAlign = "center";
-        ctx.fillText("You made it to the Finish! Winner winner chicken dinner", canvas.width/2,canvas.height/2);
+        ctx.fillText("Winner winner chicken mushroom? dinner!", canvas.width/2,200);
+        ctx.drawImage(shades, canvas.width/2-shades.width/2, 250);
     }else{
-        ctx.fillStyle = "black";
+        ctx.fillStyle = "aliceblue";
         ctx.font = "25px New Times Roman";
         ctx.textAlign = "center";
-        ctx.fillText("You ran out of fuel, get toad loser", canvas.width/2,200);
-        ctx.drawImage(toad, canvas.width/2-toad.width/2, 250);
+        ctx.fillText("You ran out of fuel, get toad loser", canvas.width/2,150);
+        ctx.fillText("Press Space to restart", canvas.width/2,470);
+        ctx.drawImage(toad, canvas.width/2-toad.width/2, 170);
     }
 }
 
@@ -129,7 +134,7 @@ function runStartTimer(){
 }
 
 function drawStartTimer(){
-    ctx.fillStyle = "black";
+    ctx.fillStyle = "aliceblue";
     ctx.font = "25px New Times Roman";
     ctx.textAlign = "center";
     ctx.fillText(seconds, canvas.width/2,canvas.height/2);
