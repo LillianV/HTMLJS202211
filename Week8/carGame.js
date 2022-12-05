@@ -109,7 +109,7 @@ function drawResults(){
         ctx.fillStyle = "aliceblue";
         ctx.font = "25px New Times Roman";
         ctx.textAlign = "center";
-        ctx.fillText("Winner winner chicken mushroom? dinner!", canvas.width/2,200);
+        ctx.fillText("Winner winner chicken mushroom dinner!", canvas.width/2,200);
         ctx.drawImage(shades, canvas.width/2-shades.width/2, 250);
     }else{
         ctx.fillStyle = "aliceblue";
