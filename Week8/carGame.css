@@ -1,7 +1,7 @@
 html,body{
     display: flex;
     justify-content: center;
-    color:aliceblue;
+    color: darkslategray;
     
 }
 canvas{
