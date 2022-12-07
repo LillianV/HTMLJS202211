@@ -34,6 +34,7 @@ function pressKeyDown(e) {
             //code for down
             ship.down = true;
         }
+    
     }
 
 
@@ -204,6 +205,10 @@ function main() {
 
     while(asteroids.length<numAsteroids){
         asteroids.push(new Asteroid());
+    }
+    
+    function restartGame(){
+        location.reload();
     }
 }
 

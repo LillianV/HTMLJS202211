@@ -103,6 +103,16 @@ function drawFuelBar(){
         ctx.fillRect(start,30,currentBarWidth,10);
     }
 }
+this.move = function(){
+    this.x += this.vx;
+    this.y += this.vy;
+
+    //right side of canvas
+    if(this.x>canvas.width - carPos + carWidth){
+        this.x = canvas.width-(carPos + carWidth);
+        this.vx = 0;
+    }
+}
 
 function drawResults(){
     if(carPos + carWidth > finish){
