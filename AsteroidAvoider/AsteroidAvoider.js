@@ -233,7 +233,7 @@ gameState[1]=function(){
      ctx.font = "15px New Times Roman";
      ctx.fillStyle = "aliceblue";
      ctx.fillText(`Score:${score}`,canvas.width - 150, 30);
-     ctx.fillText(`Lives:${numLives}`,canvas.width - 130, 30);
+     ctx.fillText(`Lives:${numLives}`,canvas.width - 150, 50);
      ctx.restore();
 
      //draw ship
@@ -264,13 +264,16 @@ gameState[1]=function(){
          var distance = Math.sqrt((dX * dX) + (dY * dY));
  
          //collision detection happens
-         if (detectCollision(distance, (ship.height / 2 + asteroids[i].radius))&&vvv) {
+         if (detectCollision(distance, (ship.height / 2 + asteroids[i].radius))&&stopCollision) {
             numLives -= 1;
-            setTimeout(stopCollision, 5000);
-             //gameOver = true;
-             //currentState = 2;
-             main();
-             return;
+            setTimeout(stopCollision, 3000);
+            if(numLives=0){
+                gameOver = true;
+                currentState = 2;
+                main();
+                return;  
+            }
+             
          }
  
          if (asteroids[i].y > canvas.height + asteroids[i].radius) {
@@ -334,6 +337,9 @@ function randomRange(high, low) {
 function detectCollision(distance, calcDistance) {
     return distance < calcDistance;
 }
+function stopCollision(){
+    detectCollision=false;
+}
 
 function scoreTimer(){
     if(!gameOver){
@@ -344,5 +350,10 @@ function scoreTimer(){
         }
         //calls score timer every sec
         setTimeout(scoreTimer, 1000);
+    }
+}
+function lifeCounter(){
+    if(!gameOver){
+        numLives==0;
     }
 }
