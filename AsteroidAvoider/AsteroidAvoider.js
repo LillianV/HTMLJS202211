@@ -8,17 +8,32 @@ var currentState = 0;
 var gameState = [];
 var numLives = 3;
 
-
+var canDetectCollision = true;
 
 
 //asteroid variables
 var numAsteroids = 15
 var asteroids = [];
+var asteroidSprite = new Image();
+asteroidSprite.src = "images/asteroid.png";
 
 //Player ship variables
 var ship = new PlayerShip();
 var shipSprite = new Image();
 shipSprite.src = "images/spaceship.png";
+
+//Menu variables
+var menu = new Image();
+menu.src = "images/AsteroidMenu.png"
+var endMenu = new Image();
+endMenu = "images/AsteroidGameOver.png"
+
+endMenu.onload = function(){
+    main();
+}
+menu.onload = function(){
+    main();
+}
 
 //create keyboard event handlers
 document.addEventListener("keydown", pressKeyDown);
@@ -50,17 +65,20 @@ function pressKeyDown(e) {
             if(currentState == 2){
                 //gameover screen
                 currentState = 0;
+                canDetectCollision = true;
                 numAsteroids = 15;
                 asteroids=[];
                 score = 0;
+                
                 //start game here
                 main();
                 
             }else{
                 //main menu screen
+                gameOver = false;
                 gameStart();
                 currentState = 1;
-                gameOver = false;
+                numLives = 3;
                 main();
                 scoreTimer();
                 console.log(currentState)
@@ -96,14 +114,15 @@ function pressKeyUp(e) {
 function Asteroid() {
     //properties to draw asteroid
     this.radius = randomRange(18, 5);
-    this.x = randomRange(canvas.width - this.radius, this.radius);
-    this.y = randomRange(canvas.height - this.radius, this.radius) - canvas.height;
+    this.x = randomRange(canvas.width - this.radius, this.radius) + canvas.width;
+    this.y = randomRange(canvas.height - this.radius, this.radius) //- canvas.height;
     this.vy = randomRange(10, 5);
     this.color = "darkslategrey";
 
     //methods/function to draw asteroid
     this.drawAsteroid = function () {
         ctx.save();
+        ctx.drawImage(asteroidSprite,this.x,this.y);
         ctx.beginPath();
         ctx.fillStyle = this.color;
         ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2, true);
@@ -154,15 +173,15 @@ function PlayerShip() {
         }
 
         //draw the ship
-        ctx.drawImage(shipSprite,this.y,this.x);
-        ctx.fillStyle = "purple";
+        ctx.drawImage(shipSprite,-20,-20);
+        /*ctx.fillStyle = "purple";
         ctx.beginPath();
         ctx.moveTo(0, -10);
         ctx.lineTo(10, 10);
         ctx.lineTo(-10, 10);
         ctx.lineTo(0, -10);
         ctx.closePath();
-        ctx.fill();
+        ctx.fill();*/
         ctx.restore();
     }
 
@@ -217,18 +236,13 @@ gameState[0]=function(){
     //code for main menus
     console.log(gameOver)
     ctx.save();
-    ctx.font = "30px New Times Roman";
-    ctx.fillStyle = "aliceblue";
-    ctx.textAlign = "center";
-    ctx.fillText("Asteroid Avoider",canvas.width/2,canvas.height/2 - 30);
-    ctx.font = "15px New Times Roman";
-    ctx.fillText("Press Space to start", canvas.width/2, canvas.height/2+20);
+    ctx.drawImage(menu,0,0,canvas.height,canvas.width);
     ctx.restore();
 }
 //play game state
 gameState[1]=function(){
     //code for game play state
-    if(numLives=0){
+    if(numLives==0){
         gameOver = true;
     }
      //draw score to screen
@@ -253,9 +267,9 @@ gameState[1]=function(){
      }
      //horizontal movement
      if (ship.left) {
-         ship.vx = -5;
+         ship.vx = -10;
      } else if (ship.right) {
-         ship.vx = 5;
+         ship.vx = 10;
      } else {
          ship.vx = 0;
      }
@@ -267,23 +281,29 @@ gameState[1]=function(){
          var distance = Math.sqrt((dX * dX) + (dY * dY));
  
          //collision detection happens
-         if (detectCollision(distance, (ship.height / 2 + asteroids[i].radius))&&stopCollision) {
-            numLives -= 1;
+         if (detectCollision(distance, (ship.height / 2 + asteroids[i].radius))&&canDetectCollision) {
+            
+            if(numLives>0){
+                numLives -= 1;
+            canDetectCollision = false;
             setTimeout(stopCollision, 3000);
-            if(numLives=0){
-                gameOver = true;
-                currentState = 2;
-                main();
-                return;  
+            return;
             }
              
-         }
+         }else if(numLives==0){
+            console.log(currentState);
+            gameOver = true;
+            currentState = 2;
+            main();
+            
+            return;  
+        }
  
-         if (asteroids[i].y > canvas.height + asteroids[i].radius) {
+         if (asteroids[i].x < asteroids[i].radius) {
              asteroids[i].y = randomRange(canvas.height - asteroids[i].radius, asteroids[i].radius) - canvas.height;
              asteroids[i].x = randomRange(canvas.width - asteroids[i].radius, asteroids[i].radius);
          }
-         asteroids[i].y += asteroids[i].vy;
+         asteroids[i].x -= asteroids[i].vy;
          asteroids[i].drawAsteroid();
      }
      //adds asteroids
@@ -296,6 +316,7 @@ gameState[2]=function(){
     if(score>highScore){
         highScore = score;
         ctx.save();
+    ctx.drawImage(endMenu,0,0)
     ctx.font = "30px New Times Roman";
     ctx.fillStyle = "aliceblue";
     ctx.textAlign = "center";
@@ -303,8 +324,6 @@ gameState[2]=function(){
     ctx.font = "25px New Times Roman";
     ctx.fillText("Your New High Score is: " + highScore.toString(), canvas.width/2, canvas.height/2 - 40);
     ctx.fillText("New Record!", canvas.width/2, canvas.height/2);
-    ctx.font = "20px New Times Roman";
-    ctx.fillText("Press Space to play again", canvas.width/2, canvas.height/2 + 50);
     ctx.restore();
 
     }else{
@@ -316,8 +335,6 @@ gameState[2]=function(){
     ctx.fillText("Game Over, Your Score was: " + score.toString(), canvas.width/2, canvas.height/2 - 80);
     ctx.font = "25px New Times Roman";
     ctx.fillText("Your High Score is: " + highScore.toString(), canvas.width/2, canvas.height/2 - 40);
-    ctx.font = "20px New Times Roman";
-    ctx.fillText("Press Space to play again", canvas.width/2, canvas.height/2 + 20);
     ctx.restore();  
     }
     
@@ -341,7 +358,7 @@ function detectCollision(distance, calcDistance) {
     return distance < calcDistance;
 }
 function stopCollision(){
-    detectCollision=false;
+    canDetectCollision=true;
 }
 
 function scoreTimer(){
