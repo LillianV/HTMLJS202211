@@ -318,7 +318,7 @@ gameState[2]=function(){
         ctx.save();
     ctx.drawImage(endMenu,0,0)
     ctx.font = "30px New Times Roman";
-    ctx.fillStyle = "aliceblue";
+    ctx.fillStyle = "#7c4771";
     ctx.textAlign = "center";
     ctx.fillText("Game Over, Your Score was: " + score.toString(), canvas.width/2, canvas.height/2 - 80);
     ctx.font = "25px New Times Roman";
@@ -330,7 +330,7 @@ gameState[2]=function(){
       //gameover menu
     ctx.save();
     ctx.font = "30px New Times Roman";
-    ctx.fillStyle = "aliceblue";
+    ctx.fillStyle = "#7c4771";
     ctx.textAlign = "center";
     ctx.fillText("Game Over, Your Score was: " + score.toString(), canvas.width/2, canvas.height/2 - 80);
     ctx.font = "25px New Times Roman";
