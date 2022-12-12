@@ -17,6 +17,8 @@ var asteroids = [];
 
 //Player ship variables
 var ship = new PlayerShip();
+var shipSprite = new Image();
+shipSprite.src = "images/spaceship.png";
 
 //create keyboard event handlers
 document.addEventListener("keydown", pressKeyDown);
@@ -152,6 +154,7 @@ function PlayerShip() {
         }
 
         //draw the ship
+        ctx.drawImage(shipSprite,this.y,this.x);
         ctx.fillStyle = "purple";
         ctx.beginPath();
         ctx.moveTo(0, -10);
