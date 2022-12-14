@@ -122,12 +122,12 @@ function Asteroid() {
     //methods/function to draw asteroid
     this.drawAsteroid = function () {
         ctx.save();
-        ctx.drawImage(asteroidSprite,this.x,this.y);
         ctx.beginPath();
         ctx.fillStyle = this.color;
         ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2, true);
         ctx.closePath();
         ctx.fill();
+        ctx.drawImage(asteroidSprite,this.x-this.radius, this.y-this.radius, this.radius*2, this.radius*2);
         ctx.restore();
         //console.log(this.x,this.y,this.radius, this.color);
     }
@@ -249,7 +249,8 @@ gameState[1]=function(){
      ctx.save();
      ctx.font = "15px New Times Roman";
      ctx.fillStyle = "aliceblue";
-     ctx.fillText(`Score:${score}`,canvas.width - 150, 30);
+     ctx.fillText(`Score:${score}`,canvas.width - 100, 30);
+     ctx.fillText(`High Score:${highScore}`,canvas.width - 210, 30);
      ctx.fillText(`Lives:${numLives}`,canvas.width - 150, 50);
      ctx.restore();
 
@@ -259,9 +260,9 @@ gameState[1]=function(){
  
      //vertical move
      if (ship.up) {
-         ship.vy = -10;
+         ship.vy = -7;
      } else if (ship.down) {
-         ship.vy = 10;
+         ship.vy = 7;
      } else {
          ship.vy = 0;
      }
@@ -316,15 +317,15 @@ gameState[2]=function(){
     if(score>highScore){
         highScore = score;
         ctx.save();
-    ctx.drawImage(endMenu,0,0)
-    ctx.font = "30px New Times Roman";
-    ctx.fillStyle = "#7c4771";
-    ctx.textAlign = "center";
-    ctx.fillText("Game Over, Your Score was: " + score.toString(), canvas.width/2, canvas.height/2 - 80);
-    ctx.font = "25px New Times Roman";
-    ctx.fillText("Your New High Score is: " + highScore.toString(), canvas.width/2, canvas.height/2 - 40);
-    ctx.fillText("New Record!", canvas.width/2, canvas.height/2);
-    ctx.restore();
+        ctx.drawImage(endMenu,0,0,canvas.height,canvas.width);
+        ctx.font = "30px New Times Roman";
+        ctx.fillStyle = "#7c4771";
+        ctx.textAlign = "center";
+        ctx.fillText("Game Over, Your Score was: " + score.toString(), canvas.width/2, canvas.height/2 - 80);
+        ctx.font = "25px New Times Roman";
+        ctx.fillText("Your New High Score is: " + highScore.toString(), canvas.width/2, canvas.height/2 - 40);
+        ctx.fillText("New Record!", canvas.width/2, canvas.height/2);
+        ctx.restore();
 
     }else{
       //gameover menu
