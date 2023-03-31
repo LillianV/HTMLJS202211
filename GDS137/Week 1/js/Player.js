@@ -22,7 +22,10 @@ function Player()
 		context.save();
 			context.fillStyle = this.color;
 			context.translate(this.x, this.y);
-			context.fillRect((-this.width/2), (-this.height/2), this.width, this.height);
+			context.beginPath();
+			context.arc(0,0,this.width/2,0,360*Math.PI/180,true)
+			context.closePath();
+			context.fill();
 		context.restore();
 		
 	}	
