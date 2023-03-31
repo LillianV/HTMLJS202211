@@ -35,20 +35,24 @@ function animate()
 	if(player.x < player.width/2){
 		player.x = player.width/2
 		player.vx = -player.vx;
+		player.color = "red";
 	}
 	
 	if(player.x > canvas.width - player.width/2){
 		player.x = canvas.width - player.width/2
 		player.vx = -player.vx;
+		player.color = "blue";
 	}
 	if(player.y < player.height/2){
 		player.y = player.height/2
 		player.vy = -player.vy;
+		player.color = "green";
 	}
 	
 	if(player.y > canvas.height - player.height/2){
 		player.y = canvas.height - player.height/2
 		player.vy = -player.vy;
+		player.color = "purple";
 	}
 	
 	//Update the Screen
