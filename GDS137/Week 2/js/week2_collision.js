@@ -36,13 +36,13 @@ function animate()
 	if(d)
 	{
 		//console.log("Moving Right");
-		player.x += 2;
+		player.x += 10;
 	}
 	
 	if(a)
 	{
 		//console.log("Moving Right");
-		player.x += -2;
+		player.x += -10;
 	}
 	
 	
@@ -76,12 +76,8 @@ function animate()
 	//Impede movement
 	if(rBlock2.hitTestObject(player))
 	{
-		player.x = prevX;
+		player.x = rBlock2.x-rBlock2.width/2 - player.width/2;
 		console.log("colliding");
-	}
-	else
-	{
-		prevX = player.x;
 	}
 	
 	//Update the Screen
