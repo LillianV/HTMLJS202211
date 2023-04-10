@@ -28,12 +28,22 @@ function animate()
 	if(w)
 	{
 		console.log("Moving up");
-		player.y += -5;
+		player.y += -7;
 	}
 	if(s)
 	{
 		console.log("Moving down");
-		player.y += 5;
+		player.y += 7;
+	}
+
+	if(player.y < player.height/2){
+		player.y = player.height/2
+		player.vy = -player.vy;
+	}
+	
+	if(player.y > canvas.height - player.height/2){
+		player.y = canvas.height - player.height/2
+		player.vy = -player.vy;
 	}
 	
 	//Update the Screen
