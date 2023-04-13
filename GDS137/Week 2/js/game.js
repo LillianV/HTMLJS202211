@@ -17,7 +17,7 @@ var player;
 
 	var ball = new GameObject();
 	ball.vx = -10;
-	ball.vy = -10;
+	ball.vy = 0;
 	ball.color = "purple";
 	ball.width = 40;
 	ball.height = 40;
@@ -56,7 +56,9 @@ function animate()
 	ball.move();
 
 	//collision
-	
+	if(ball.x < 0 - ball.width){
+		ball.x = canvas.width/2;
+	}
 	if(ball.x > canvas.width - ball.width/2){
 		ball.x = canvas.width - ball.width/2
 		ball.vx = -ball.vx;
@@ -73,6 +75,7 @@ function animate()
 		ball.vy = -ball.vy;
 		ball.color = "purple";
 	}
+	
 	
 	//Update the Screen
 	ball.drawCircle();
