@@ -35,12 +35,12 @@ function animate()
 	if(w)
 	{
 		console.log("Moving up");
-		player.y += -7;
+		player.y += -9;
 	}
 	if(s)
 	{
 		console.log("Moving down");
-		player.y += 7;
+		player.y += 9;
 	}
 
 	if(player.y < player.height/2){
@@ -56,11 +56,6 @@ function animate()
 	ball.move();
 
 	//collision
-	if(ball.x < ball.width/2){
-		ball.x = ball.width/2
-		ball.vx = -ball.vx;
-		ball.color = "red";
-	}
 	
 	if(ball.x > canvas.width - ball.width/2){
 		ball.x = canvas.width - ball.width/2
@@ -84,5 +79,12 @@ function animate()
 	
 	//Update the Screen
 	player.drawRect();
+
+	if(ball.hitTestObject(player))
+	{
+		ball.x = player.x+player.width/2 + ball.width/2;
+		ball.vx = -ball.vx;
+		console.log("colliding");
+	}
 }
 

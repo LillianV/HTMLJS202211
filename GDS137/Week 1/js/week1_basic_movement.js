@@ -32,11 +32,6 @@ function animate()
 	ball.move();
 
 	//collision
-	if(ball.x < ball.width/2){
-		ball.x = ball.width/2
-		ball.vx = -ball.vx;
-		ball.color = "red";
-	}
 	
 	if(ball.x > canvas.width - ball.width/2){
 		ball.x = canvas.width - ball.width/2
