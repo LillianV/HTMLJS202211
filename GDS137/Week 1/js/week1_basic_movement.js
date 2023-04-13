@@ -5,19 +5,19 @@ var context;
 var timer;
 //1000 ms or 1 second / FPS
 var interval = 1000/60;
-var player;
+var ball;
 
 	//Set Up the Canvas
 	canvas = document.getElementById("canvas");
 	context = canvas.getContext("2d");	
 	
 	//Instantiate the Player
-	player = new Player();
-	player.vx = -10;
-	player.vy = -10;
-	player.color = "purple";
-	player.width = 40;
-	player.height = 40;
+	ball = new Player();
+	ball.vx = -10;
+	ball.vy = -10;
+	ball.color = "purple";
+	ball.width = 40;
+	ball.height = 40;
 		
 	
 	//Set the Animation Timer
@@ -29,34 +29,34 @@ function animate()
 	context.clearRect(0,0,canvas.width, canvas.height);	
 	
 	//Move the Player
-	player.move();
+	ball.move();
 
 	//collision
-	if(player.x < player.width/2){
-		player.x = player.width/2
-		player.vx = -player.vx;
-		player.color = "red";
+	if(ball.x < ball.width/2){
+		ball.x = ball.width/2
+		ball.vx = -ball.vx;
+		ball.color = "red";
 	}
 	
-	if(player.x > canvas.width - player.width/2){
-		player.x = canvas.width - player.width/2
-		player.vx = -player.vx;
-		player.color = "blue";
+	if(ball.x > canvas.width - ball.width/2){
+		ball.x = canvas.width - ball.width/2
+		ball.vx = -ball.vx;
+		ball.color = "blue";
 	}
-	if(player.y < player.height/2){
-		player.y = player.height/2
-		player.vy = -player.vy;
-		player.color = "green";
+	if(ball.y < ball.height/2){
+		ball.y = ball.height/2
+		ball.vy = -ball.vy;
+		ball.color = "green";
 	}
 	
-	if(player.y > canvas.height - player.height/2){
-		player.y = canvas.height - player.height/2
-		player.vy = -player.vy;
-		player.color = "purple";
+	if(ball.y > canvas.height - ball.height/2){
+		ball.y = canvas.height - ball.height/2
+		ball.vy = -ball.vy;
+		ball.color = "purple";
 	}
 	
 	//Update the Screen
-	player.draw();
+	ball.draw();
 }
 
 

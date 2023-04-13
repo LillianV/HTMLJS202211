@@ -15,6 +15,13 @@ var player;
 	player = new GameObject();
 	player.x = 0;
 
+	var ball = new GameObject();
+	ball.vx = -10;
+	ball.vy = -10;
+	ball.color = "purple";
+	ball.width = 40;
+	ball.height = 40;
+
 	//Set the Animation Timer
 	timer = setInterval(animate, interval);
 
@@ -45,6 +52,35 @@ function animate()
 		player.y = canvas.height - player.height/2
 		player.vy = -player.vy;
 	}
+
+	ball.move();
+
+	//collision
+	if(ball.x < ball.width/2){
+		ball.x = ball.width/2
+		ball.vx = -ball.vx;
+		ball.color = "red";
+	}
+	
+	if(ball.x > canvas.width - ball.width/2){
+		ball.x = canvas.width - ball.width/2
+		ball.vx = -ball.vx;
+		ball.color = "blue";
+	}
+	if(ball.y < ball.height/2){
+		ball.y = ball.height/2
+		ball.vy = -ball.vy;
+		ball.color = "green";
+	}
+	
+	if(ball.y > canvas.height - ball.height/2){
+		ball.y = canvas.height - ball.height/2
+		ball.vy = -ball.vy;
+		ball.color = "purple";
+	}
+	
+	//Update the Screen
+	ball.drawCircle();
 	
 	//Update the Screen
 	player.drawRect();
