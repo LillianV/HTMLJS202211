@@ -22,6 +22,10 @@ ball.color = "purple";
 ball.width = 40;
 ball.height = 40;
 
+var player2 = new GameObject();
+player2.x = 1024;
+player2.color = "blue";
+
 //Set the Animation Timer
 timer = setInterval(animate, interval);
 
@@ -56,11 +60,10 @@ function animate() {
 	if (ball.x < 0 - ball.width) {
 		ball.x = canvas.width / 2;
 	}
-	if (ball.x > canvas.width - ball.width / 2) {
-		ball.x = canvas.width - ball.width / 2
-		ball.vx = -ball.vx;
-		ball.color = "blue";
+	if (ball.x > 1024 + ball.width) {
+		ball.x = canvas.width / 2;
 	}
+
 	if (ball.y < ball.height / 2) {
 		ball.y = ball.height / 2
 		ball.vy = -ball.vy;
@@ -72,6 +75,25 @@ function animate() {
 		ball.vy = -ball.vy;
 		ball.color = "purple";
 	}
+	//Player 2
+	if (u) {
+		console.log("Moving up");
+		player2.y += -9;
+	}
+	if (j) {
+		console.log("Moving down");
+		player2.y += 9;
+	}
+
+	if (player2.y < player2.height / 2) {
+		player2.y = player2.height / 2
+		player2.vy = -player2.vy;
+	}
+
+	if (player2.y > canvas.height - player2.height / 2) {
+		player2.y = canvas.height - player2.height / 2
+		player2.vy = -player2.vy;
+	}
 
 
 	//Update the Screen
@@ -79,6 +101,7 @@ function animate() {
 
 	//Update the Screen
 	player.drawRect();
+	player2.drawRect();
 
 	if (ball.hitTestObject(player)) {
 		ball.x = player.x + player.width / 2 + ball.width / 2;
@@ -87,28 +110,26 @@ function animate() {
 
 		//top
 		if (ball.y < player.y - player.height / 6) {
-
-			if (ball.vy > 0 && ball.vy < 20) {
-				ball.vy = -5; 
-			}
-			else if (ball.vx < 0 && ball.vx) {
-				ball.vy = 5; 
-			}
-			else {
 				ball.vy = -5;
-			}
 		}
 		//bottom
 		if (ball.y > player.y + player.height / 6) {
-			if (ball.vy > 0 && ball.vy) {
 				ball.vy = 5;
-			}
-			else if (ball.vx < 0 && ball.vx) {
+		}
+	}
+	//Player 2 collision w/ ball
+	if (ball.hitTestObject(player2)) {
+		ball.x = player2.x - player2.width / 2 - ball.width / 2;
+		ball.vx = -ball.vx;
+		console.log("colliding");
+
+		//top
+		if (ball.y < player2.y - player2.height / 6) {
+				ball.vy = -5;
+		}
+		//bottom
+		if (ball.y > player2.y + player2.height / 6) {
 				ball.vy = 5;
-			}
-			else {
-				ball.vy = 5;
-			}
 		}
 	}
 
