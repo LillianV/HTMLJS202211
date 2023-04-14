@@ -4,90 +4,112 @@ var canvas;
 var context;
 var timer;
 //1000 ms or 1 second / FPS
-var interval = 1000/60;
+var interval = 1000 / 60;
 var player;
 
-	//Set Up the Canvas
-	canvas = document.getElementById("canvas");
-	context = canvas.getContext("2d");	
-	
-	//Instantiate the Player
-	player = new GameObject();
-	player.x = 0;
+//Set Up the Canvas
+canvas = document.getElementById("canvas");
+context = canvas.getContext("2d");
 
-	var ball = new GameObject();
-	ball.vx = -10;
-	ball.vy = 0;
-	ball.color = "purple";
-	ball.width = 40;
-	ball.height = 40;
+//Instantiate the Player
+player = new GameObject();
+player.x = 0;
 
-	//Set the Animation Timer
-	timer = setInterval(animate, interval);
+var ball = new GameObject();
+ball.vx = -10;
+ball.vy = 0;
+ball.color = "purple";
+ball.width = 40;
+ball.height = 40;
 
-function animate()
-{
+//Set the Animation Timer
+timer = setInterval(animate, interval);
+
+function animate() {
 	//Erase the Screen
-	context.clearRect(0,0,canvas.width, canvas.height);	
-	
-	
+	context.clearRect(0, 0, canvas.width, canvas.height);
+
+
 	//Move the Player to the right
-	if(w)
-	{
+	if (w) {
 		console.log("Moving up");
 		player.y += -9;
 	}
-	if(s)
-	{
+	if (s) {
 		console.log("Moving down");
 		player.y += 9;
 	}
 
-	if(player.y < player.height/2){
-		player.y = player.height/2
+	if (player.y < player.height / 2) {
+		player.y = player.height / 2
 		player.vy = -player.vy;
 	}
-	
-	if(player.y > canvas.height - player.height/2){
-		player.y = canvas.height - player.height/2
+
+	if (player.y > canvas.height - player.height / 2) {
+		player.y = canvas.height - player.height / 2
 		player.vy = -player.vy;
 	}
 
 	ball.move();
 
 	//collision
-	if(ball.x < 0 - ball.width){
-		ball.x = canvas.width/2;
+	if (ball.x < 0 - ball.width) {
+		ball.x = canvas.width / 2;
 	}
-	if(ball.x > canvas.width - ball.width/2){
-		ball.x = canvas.width - ball.width/2
+	if (ball.x > canvas.width - ball.width / 2) {
+		ball.x = canvas.width - ball.width / 2
 		ball.vx = -ball.vx;
 		ball.color = "blue";
 	}
-	if(ball.y < ball.height/2){
-		ball.y = ball.height/2
+	if (ball.y < ball.height / 2) {
+		ball.y = ball.height / 2
 		ball.vy = -ball.vy;
 		ball.color = "green";
 	}
-	
-	if(ball.y > canvas.height - ball.height/2){
-		ball.y = canvas.height - ball.height/2
+
+	if (ball.y > canvas.height - ball.height / 2) {
+		ball.y = canvas.height - ball.height / 2
 		ball.vy = -ball.vy;
 		ball.color = "purple";
 	}
-	
-	
+
+
 	//Update the Screen
 	ball.drawCircle();
-	
+
 	//Update the Screen
 	player.drawRect();
 
-	if(ball.hitTestObject(player))
-	{
-		ball.x = player.x+player.width/2 + ball.width/2;
+	if (ball.hitTestObject(player)) {
+		ball.x = player.x + player.width / 2 + ball.width / 2;
 		ball.vx = -ball.vx;
 		console.log("colliding");
-	}
-}
 
+		//top
+		if (ball.y < player.y - player.height / 6) {
+
+			if (ball.vy > 0 && ball.vy < 20) {
+				ball.vy = -5; 
+			}
+			else if (ball.vx < 0 && ball.vx) {
+				ball.vy = 5; 
+			}
+			else {
+				ball.vy = -5;
+			}
+		}
+		//bottom
+		if (ball.y > player.y + player.height / 6) {
+			if (ball.vy > 0 && ball.vy) {
+				ball.vy = 5;
+			}
+			else if (ball.vx < 0 && ball.vx) {
+				ball.vy = 5;
+			}
+			else {
+				ball.vy = 5;
+			}
+		}
+	}
+
+}
