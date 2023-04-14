@@ -7,6 +7,9 @@ var timer;
 var interval = 1000 / 60;
 var player;
 
+var pWins = 0;
+var p2Wins = 0;
+
 //Set Up the Canvas
 canvas = document.getElementById("canvas");
 context = canvas.getContext("2d");
@@ -59,9 +62,13 @@ function animate() {
 	//collision
 	if (ball.x < 0 - ball.width) {
 		ball.x = canvas.width / 2;
+		p2Wins = p2Wins + 1;
+		console.log(p2Wins);
 	}
 	if (ball.x > 1024 + ball.width) {
 		ball.x = canvas.width / 2;
+		pWins = pWins + 1;
+		console.log(pWins);
 	}
 
 	if (ball.y < ball.height / 2) {
