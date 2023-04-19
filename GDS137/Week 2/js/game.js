@@ -10,6 +10,9 @@ var player;
 var pWins = 0;
 var p2Wins = 0;
 
+var p1Score = 0;
+var p2Score = 0;
+
 //Set Up the Canvas
 canvas = document.getElementById("canvas");
 context = canvas.getContext("2d");
@@ -35,6 +38,18 @@ timer = setInterval(animate, interval);
 function animate() {
 	//Erase the Screen
 	context.clearRect(0, 0, canvas.width, canvas.height);
+
+	context.save();
+    context.strokeStyle = "green";
+    context.beginPath();
+
+    context.moveTo(canvas.width/2, 800);
+    context.lineTo(canvas.width/2, 0);
+
+    context.closePath();
+    context.lineWidth = 5;
+    context.stroke();
+    context.restore();
 
 
 	//Move the Player to the right
@@ -62,13 +77,13 @@ function animate() {
 	//collision
 	if (ball.x < 0 - ball.width) {
 		ball.x = canvas.width / 2;
-		p2Wins = p2Wins + 1;
-		console.log(p2Wins);
+		p2Score++;
+  		updateScore();
 	}
 	if (ball.x > 1024 + ball.width) {
 		ball.x = canvas.width / 2;
-		pWins = pWins + 1;
-		console.log(pWins);
+		p1Score++;
+  		updateScore();
 	}
 
 	if (ball.y < ball.height / 2) {
@@ -139,5 +154,35 @@ function animate() {
 				ball.vy = 5;
 		}
 	}
+	// hud
+context.font = "20px Georgia";
+context.fillStyle = "black";
+context.textAlign = "center";
+context.fillText("player 1: " + p1Score, canvas.width/2, 20); 
+
+context.font = "20px Georgia";
+context.fillStyle = "black";
+context.textAlign = "center";
+context.fillText("player 2: " + p2Score, canvas.width/2, 50); 
+
+// update score when player1 wins
+function pWins() {
+  p1Score++;
+  updateScore();
+}
+
+// update score when player2 wins
+function p2Wins() {
+  p2Score++;
+  updateScore();
+}
+
+function updateScore() {
+  var p1ScoreElement = document.getElementById("p1Score");
+  var p2ScoreElement = document.getElementById("p2Score");
+  p1ScoreElement.textContent = p1Score; 
+  p2ScoreElement.textContent = p2Score;
+}
+
 
 }
