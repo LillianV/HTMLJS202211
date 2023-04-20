@@ -13,6 +13,8 @@ var p2Wins = 0;
 var p1Score = 0;
 var p2Score = 0;
 
+var img=document.getElementById("ric");
+
 //Set Up the Canvas
 canvas = document.getElementById("canvas");
 context = canvas.getContext("2d");
@@ -50,6 +52,8 @@ function animate() {
     context.lineWidth = 5;
     context.stroke();
     context.restore();
+
+	context.drawImage(img, ball.x-20, ball.y-20, 40, 40);
 
 
 	//Move the Player to the right
@@ -119,7 +123,7 @@ function animate() {
 
 
 	//Update the Screen
-	ball.drawCircle();
+	//ball.drawCircle();
 
 	//Update the Screen
 	player.drawRect();
