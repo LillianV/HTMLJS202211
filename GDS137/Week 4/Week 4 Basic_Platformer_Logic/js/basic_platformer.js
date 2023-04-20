@@ -61,7 +61,7 @@ function animate()
 	if(w && player.canJump)
 	{
 		player.canJump = false;
-		player.vy += player.jumpHeight;
+		player.vy = player.jumpHeight;
 	}
 	
 	//Apply acceleration to velocity.
