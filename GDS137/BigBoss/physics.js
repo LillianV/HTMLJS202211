@@ -115,12 +115,13 @@ function animate()
   		pWins();
 
 		//top
-		if (ball.y < player.y - player.height / 6) {
+		if (ball.y < player.y - player.width / 3) {
 				ball.vy = -35;
 		}
 		//bottom
-		if (ball.y > player.y + player.height / 6) {
+		if (ball.y > player.y + player.width / 3) {
 				ball.vy = 35;
+				ball.vx = -ball.vx;
 		}
 	}
 	player.drawRect();
