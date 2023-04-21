@@ -20,14 +20,14 @@ var gravity = 1;
 	
 	player = new GameObject();
 	player.force = 2;
-	player.width = 200;
-	player.height = 20;
-	player.y = 800;
-	player.color = "purple";
+	player.width = 250;
+	player.height = 40;
+	player.y = 750;
+	player.color = "#00ffff";
 
 	ball = new GameObject();
 	ball.force = 2;
-	ball.color = "green";
+	ball.color = "#ff00ff";
 	
 	timer = setInterval(animate, interval);
 
@@ -48,8 +48,6 @@ function animate()
 	player.vy *= frictionY;
 	player.vx *= frictionX;
 	
-	player.vy += gravity;
-	
 	player.x += player.vx;
 	player.y += player.vy;
 	
@@ -65,6 +63,10 @@ function animate()
 		player.x = canvas.width - player.width/2;
 	}
 	//left side
+	if(player.x > canvas.width - player.width/2)
+	{
+		player.x = -canvas.width - player.width/2;
+	}
 
 	ball.vy *= frictionY;
 	ball.vx *= frictionX;
@@ -82,7 +84,7 @@ function animate()
 		ball.y = canvas.height - ball.height/2;
 		//the decimal is how bouncy you want the object to be
 		//It should be a number between 0 and 2;
-		ball.vy = -ball.vy * .99;
+		ball.vy = -ball.vy * .67;
 	}
 	if(ball.x > canvas.width - ball.width/2)
 	{
@@ -91,21 +93,21 @@ function animate()
 		ball.x = canvas.width - ball.width/2;
 		//the decimal is how bouncy you want the object to be
 		//It should be a number between 0 and 2;
-		ball.vy = -ball.vy * .99;
+		ball.vy = -ball.vy * .67;
 	}
 
 	if (ball.hitTestObject(player)) {
-		ball.x = player.x + player.width / 2 + ball.width / 2;
-		ball.vx = -ball.vx;
+		ball.y = player.y - player.height / 2 - ball.height / 2;
+		ball.vy = -35;
 		console.log("colliding");
 
 		//top
 		if (ball.y < player.y - player.height / 6) {
-				ball.vy = -5;
+				ball.vy = -35;
 		}
 		//bottom
 		if (ball.y > player.y + player.height / 6) {
-				ball.vy = 5;
+				ball.vy = 35;
 		}
 	}
 	player.drawRect();
