@@ -37,7 +37,20 @@ var gravity = 1;
 function animate()
 {
 	context.clearRect(0,0,canvas.width, canvas.height);	
+	//drawing string
+	context.save();
+    context.strokeStyle = "black";
+    context.beginPath();
+
+    context.moveTo(player.x, player.y);
+    context.lineTo(ball.x, ball.y);
+
+    context.closePath();
+    context.lineWidth = 1;
+    context.stroke();
+    context.restore();
 	
+	//player movement
 	if(d)
 	{	
 		player.vx += player.ax * player.force;
@@ -70,6 +83,7 @@ function animate()
 		player.x = -canvas.width - player.width/2;
 	}
 
+	//ball stuff
 	ball.vy *= frictionY;
 	ball.vx *= frictionX;
 	
@@ -77,35 +91,28 @@ function animate()
 	
 	ball.x += ball.vx;
 	ball.y += ball.vy;
+
+	if(ball.x > canvas.width - ball.width/2){
+		ball.x = canvas.width - ball.width/2
+		ball.vy = -ball.vy * .67;
+	}
+	if(ball.y < ball.height/2){
+		ball.y = ball.height/2
+		ball.vy = -ball.vy * .67;
+	}
 	
-	//--------------------Check Collision------------------------------------------------------
-	if(ball.y > canvas.height - ball.height/2)
-	{
-		
-		//--------Bounce the Ball---------------------------------------------------------------
-		ball.y = canvas.height - ball.height/2;
-		//the decimal is how bouncy you want the object to be
-		//It should be a number between 0 and 2;
+	if(ball.y > canvas.height - ball.height/2){
+		ball.y = canvas.height - ball.height/2
 		ball.vy = -ball.vy * .67;
 		p1Score = 0;
-  		updateScore();
-	}
-	if(ball.x > canvas.width - ball.width/2)
-	{
-		
-		//--------Bounce the Ball---------------------------------------------------------------
-		ball.x = canvas.width - ball.width/2;
-		//the decimal is how bouncy you want the object to be
-		//It should be a number between 0 and 2;
-		ball.vy = -ball.vy * .67;
 	}
 
 	if (ball.hitTestObject(player)) {
 		ball.y = player.y - player.height / 2 - ball.height / 2;
 		ball.vy = -35;
 		console.log("colliding");
-		p1Score++;
-  		updateScore();
+		p1Score+1;
+  		pWins();
 
 		//top
 		if (ball.y < player.y - player.height / 6) {
@@ -126,11 +133,6 @@ function animate()
 
 	function pWins() {
 		p1Score++;
-		updateScore();
-	  }
-	  function updateScore() {
-		var p1ScoreElement = document.getElementById("p1Score");
-		p1ScoreElement.textContent = p1Score; 
 	  }
 
 }
