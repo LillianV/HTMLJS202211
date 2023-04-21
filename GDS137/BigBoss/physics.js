@@ -6,6 +6,8 @@ var timer;
 var interval = 1000/60;
 var player;
 var ball;
+var pWins = 0;
+var p1Score = 0;
 
 //---------------Set Friction and Gravity-----------------
 var frictionX = .85;	
@@ -22,7 +24,7 @@ var gravity = 1;
 	player.force = 2;
 	player.width = 250;
 	player.height = 40;
-	player.y = 750;
+	player.y = 550;
 	player.color = "#00ffff";
 
 	ball = new GameObject();
@@ -85,6 +87,8 @@ function animate()
 		//the decimal is how bouncy you want the object to be
 		//It should be a number between 0 and 2;
 		ball.vy = -ball.vy * .67;
+		p1Score = 0;
+  		updateScore();
 	}
 	if(ball.x > canvas.width - ball.width/2)
 	{
@@ -100,6 +104,8 @@ function animate()
 		ball.y = player.y - player.height / 2 - ball.height / 2;
 		ball.vy = -35;
 		console.log("colliding");
+		p1Score++;
+  		updateScore();
 
 		//top
 		if (ball.y < player.y - player.height / 6) {
@@ -112,4 +118,19 @@ function animate()
 	}
 	player.drawRect();
 	ball.drawCircle();
+
+	context.font = "16px Arial black";
+	context.fillStyle = "#555555";
+	context.textAlign = "left";
+	context.fillText("Score: " + p1Score, 80, 25); 
+
+	function pWins() {
+		p1Score++;
+		updateScore();
+	  }
+	  function updateScore() {
+		var p1ScoreElement = document.getElementById("p1Score");
+		p1ScoreElement.textContent = p1Score; 
+	  }
+
 }
