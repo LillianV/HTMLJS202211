@@ -78,10 +78,16 @@ function animate()
 		player.x = canvas.width - player.width/2;
 	}
 	//left side
-	if(player.x > canvas.width - player.width/2)
+	/*if(player.x > canvas.width - player.width/2)
 	{
-		player.x = -canvas.width - player.width/2;
-	}
+		player.x = canvas.width + player.width/2;
+	}*/
+	//working left side
+	if(player.x < player.width/2)
+        {
+            player.x = player.width/2;
+            player.vx = 0;
+        }
 
 	//ball stuff
 	ball.vy *= frictionY;
@@ -123,6 +129,11 @@ function animate()
 				ball.vy = 35;
 				ball.vx = -ball.vx;
 		}
+		//outer left 1/6
+		if (ball.y > player.y + player.width / 6) {
+			ball.vy = 35;
+			ball.vx = -ball.force*5;
+	}
 	}
 	player.drawRect();
 	ball.drawCircle();
