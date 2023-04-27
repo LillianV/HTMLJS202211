@@ -121,19 +121,20 @@ function animate()
   		pWins();
 
 		//top
-		if (ball.y < player.y - player.width / 3) {
+		if (ball.x < player.x - player.width / 6) {
 				ball.vy = -35;
+				ball.vx = -ball.force;
 		}
-		//bottom
-		if (ball.y > player.y + player.width / 3) {
-				ball.vy = 35;
-				ball.vx = -ball.vx;
+		//outer right 1/6
+		if (ball.x > player.x + player.width / 3) {
+			ball.vy = -35;
+			ball.vx = ball.force*5;
 		}
 		//outer left 1/6
-		if (ball.y > player.y + player.width / 6) {
-			ball.vy = 35;
+		if (ball.x < player.x + player.width / 3) {
+			ball.vy = -35;
 			ball.vx = -ball.force*5;
-	}
+		}
 	}
 	player.drawRect();
 	ball.drawCircle();
