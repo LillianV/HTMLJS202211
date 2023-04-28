@@ -19,7 +19,7 @@ var player;
 		
 	
 	platform1 = new GameObject();
-		platform1.x = platform1.width;
+		platform1.x = 650;
 		platform1.y = platform0.y- platform0.height/2 - platform1.height/2;
 		platform1.color = "#66ff33";
 		platform1.vx = 3;
@@ -30,7 +30,7 @@ var player;
 		platform2.color = "#66ff33";
 		platform2.y = platform0.y- 200;
 		platform2.color = "#66ff33";
-
+	
 		
 	
 	goal = new GameObject({width:24, height:50, x:platform1.x, y:platform1.y+100, color:"#00ffff"});
@@ -125,11 +125,12 @@ function animate()
 	//---------Objective: Save Me!---------------------------------------------------------------------------------------------------- 
 	//---------Add a wall that will stop the player from falling--------------------------------------------------------------------------------
 
-
-	
-	
-
-
+		
+		while(platform1.hitTestPoint(player.right()))
+		{
+			player.x--;
+			player.vx = 0;
+		}
 
 	
 
@@ -140,6 +141,7 @@ function animate()
 	
 	platform0.drawRect();
 	platform2.drawRect();
+	platform1.drawRect();
 	
 	player.drawRect();
 	
