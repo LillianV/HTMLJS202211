@@ -10,7 +10,7 @@ var pWins = 0;
 var p1Score = 0;
 
 //---------------Set Friction and Gravity-----------------
-var frictionX = .85;	
+var frictionX = .92;	
 var frictionY = .99;
 var gravity = 1;
 //--------------------------------------------------------
@@ -96,11 +96,11 @@ function animate()
 
 	if(ball.x > canvas.width - ball.width/2){
 		ball.x = canvas.width - ball.width/2
-		ball.vx = -ball.vx;
+		ball.vx = -ball.vx*5;
 	}
 	if (ball.x < 0 + ball.width/2) {
 		ball.x = 0 + ball.width/2;
-		ball.vx = -ball.vx;
+		ball.vx = -ball.vx*5;
 	}
 	if(ball.y < ball.height/2){
 		ball.y = ball.height/2
@@ -120,26 +120,27 @@ function animate()
 		p1Score+1;
   		pWins();
 
+		//inner right
+        if (ball.x > player.x + player.width / 6) {
+            ball.vy = -35;
+            ball.vx = ball.force;
+        }
 		//outer right
 		if (ball.x > player.x + player.width / 3) {
 			ball.vy = -35;
 			ball.vx = ball.force*5;
 		}
-		//inner right
-        if (ball.x > player.x + player.width / 6) {
-            ball.vy = -35;
-            ball.vx = ball.force*5;
-        }
 		// inner left
         if (ball.x < player.x - player.width / 6) {
             ball.vx = 35;
-            ball.vx = -ball.force*5;
+            ball.vx = -ball.force;
         }
 		//outer left
 		if (ball.x < player.x - player.width / 3) {
 			ball.vy = -35;
 			ball.vx = -ball.force*5;
 		}
+		
 	}
 	player.drawRect();
 	ball.drawCircle();
