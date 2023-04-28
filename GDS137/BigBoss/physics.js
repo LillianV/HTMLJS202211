@@ -11,7 +11,7 @@ var p1Score = 0;
 
 //---------------Set Friction and Gravity-----------------
 var frictionX = .85;	
-var frictionY = .97;
+var frictionY = .99;
 var gravity = 1;
 //--------------------------------------------------------
 
@@ -98,9 +98,9 @@ function animate()
 		ball.x = canvas.width - ball.width/2
 		ball.vx = -ball.vx;
 	}
-	if(ball.x < ball.height/2){
-		ball.x = ball.height/2
-		ball.vx = -ball.vx;
+	if(ball.y < ball.height/2){
+		ball.y = ball.height/2
+		ball.vy = -ball.vy;
 	}
 	
 	if(ball.y > canvas.height - ball.height/2){
