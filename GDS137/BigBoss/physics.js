@@ -30,6 +30,7 @@ var gravity = 1;
 	ball = new GameObject();
 	ball.force = 2;
 	ball.color = "#ff00ff";
+	ball.vx = 5;
 	
 	timer = setInterval(animate, interval);
 
@@ -100,16 +101,16 @@ function animate()
 
 	if(ball.x > canvas.width - ball.width/2){
 		ball.x = canvas.width - ball.width/2
-		ball.vy = -ball.vy * .67;
+		ball.vx = -ball.vx;
 	}
-	if(ball.y < ball.height/2){
-		ball.y = ball.height/2
-		ball.vy = -ball.vy * .67;
+	if(ball.x < ball.height/2){
+		ball.x = ball.height/2
+		ball.vx = -ball.vx;
 	}
 	
 	if(ball.y > canvas.height - ball.height/2){
 		ball.y = canvas.height - ball.height/2
-		ball.vy = -ball.vy * .67;
+		ball.vy = -ball.vy;
 		p1Score = 0;
 	}
 
@@ -120,18 +121,23 @@ function animate()
 		p1Score+1;
   		pWins();
 
-		//top
-		if (ball.x < player.x - player.width / 6) {
-				ball.vy = -35;
-				ball.vx = -ball.force;
-		}
-		//outer right 1/6
+		//outer right
 		if (ball.x > player.x + player.width / 3) {
 			ball.vy = -35;
 			ball.vx = ball.force*5;
 		}
-		//outer left 1/6
-		if (ball.x < player.x + player.width / 3) {
+		//inner right
+        if (ball.x > player.x + player.width / 6) {
+            ball.vy = -35;
+            ball.vx = ball.force*5;
+        }
+		// inner left
+        if (ball.x < player.x - player.width / 6) {
+            ball.vx = 35;
+            ball.vx = -ball.force*5;
+        }
+		//outer left
+		if (ball.x < player.x - player.width / 3) {
 			ball.vy = -35;
 			ball.vx = -ball.force*5;
 		}
