@@ -79,11 +79,6 @@ function animate()
 		player.x = canvas.width - player.width/2;
 	}
 	//left side
-	/*if(player.x > canvas.width - player.width/2)
-	{
-		player.x = canvas.width + player.width/2;
-	}*/
-	//working left side
 	if(player.x < player.width/2)
         {
             player.x = player.width/2;
