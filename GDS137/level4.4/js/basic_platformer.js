@@ -91,7 +91,7 @@ function animate()
 	
 	
 	//---------Objective: Get the blue pearl----------------------------------------------------------------------------------------------------
-	//---------Add to the following condition so that when you hold "s" you climb down through the platform. 
+	//---------Add to the following condition so that when you hold "s" you fall down through the platform. 
 	
 	
 
@@ -100,11 +100,20 @@ function animate()
 		player.canJump = true;
 		player.y--;
 		player.vy = 0;
-		if(s){
-			player.vy -= player.ay * player.force;
-			player.vy <=0;
-		}
+		
 	}
+	if(s){
+		player.vy -= player.ay * player.force;
+		player.y++;
+		player.vy = 0;
+	}
+
+	//float mechanic
+	/*if(s){
+		//player.vy -= player.ay * player.force;
+		player.y++;
+		player.vy =0;
+	}*/
 	
 	
 
