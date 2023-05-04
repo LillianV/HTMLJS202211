@@ -132,21 +132,27 @@ function animate()
 		player.x++;
 		player.vx = 0;
 	}
-	while(platform1.hitTestPoint(player.right()) && player.vx >=0)
-	{
-		player.x--;
-		player.vx = 0;
-	}
+	
 
 	
 	//---------Objective: Let Me Out!---------------------------------------------------------------------------------------------------- 
 	//---------Run this program first.
 	//---------Get the pearl to open the door--------------------------------------------------------------------------------------------
 	//---------Hint: you'll need a new variable to keep track of the key-----------------------------------------------------------------
-	
+	var key = false
 	if(player.hitTestObject(goal))
 	{
 		goal.y = 10000;
+		key = true
+
+	}
+	if(key = true){
+		while(platform1.hitTestPoint(player.right()) && player.vx >=0)
+		{
+		player.x--;
+		player.vx = 0;
+		platform1.x = 10000;
+		}
 	}
 	
 	
