@@ -131,16 +131,7 @@ function animate()
 		player.x++;
 		player.vx = 0;
 	}
-	while(platform1.hitTestPoint(player.right()) && player.vx >=0)
-	{
-		player.x--;
-		player.vx = 0;
-	}
-	while(platform1.hitTestPoint(player.right()) && player.vx >=0)
-	{
-		player.x--;
-		player.vx = 0;
-	}
+	
 	
 	//---------Objective: Let Me Out!---------------------------------------------------------------------------------------------------- 
 	//---------Run this program first.
@@ -148,9 +139,11 @@ function animate()
 
 	
 
-	if(player.hitTestObject(goal))
+	while(platform1.hitTestPoint(player.right())&& player.vx >=0)
 	{
-		goal.y = 10000;
+		player.x--;
+		player.vx = 0;
+		platform1.y = 10000;
 	}
 	
 
