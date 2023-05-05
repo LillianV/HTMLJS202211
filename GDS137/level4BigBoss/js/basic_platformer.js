@@ -145,9 +145,6 @@ function animate()
 		player.y++;
 		player.vy = 0;
 	}
-	
-	
-
 
 
 		// Following Mechanics
