@@ -151,6 +151,12 @@ function animate()
 		context.drawText("You Win!!!", canvas.width/2, canvas.height/2);
 	}
 	
+	if(s){
+		//player.vy -= player.ay * player.force;
+		player.y++;
+		player.vy =0;
+	}
+	
 	
 	platform0.drawRect();
 	platform1.drawRect();
