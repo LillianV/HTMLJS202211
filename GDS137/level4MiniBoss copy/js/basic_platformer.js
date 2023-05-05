@@ -178,19 +178,17 @@ function animate()
 }
 
 
-function follow()
+function follow() //actually magnet function
 {
 	var dx = player.x - follower.x + 110;
 	var dy = player.y - follower.y;
 	
+	//Not using this in this function but...
+	//This is the Pythagorean Theorem and gets the hypoteneuse of a triangle.
+	//This can be used to get the actual distance between two points.
 	var dist = Math.sqrt(dx * dx + dy * dy);
 	
-	var radians = Math.atan2(dy, dx);
-	
-	follower.vx = Math.cos(radians)*follower.force;
-	follower.vy = Math.sin(radians)*follower.force;
-
-	follower.x += follower.vx * 2;
-	follower.y += follower.vy * 2;
+	follower.x += dx /25;
+	follower.y += dy /25;
 }
 
