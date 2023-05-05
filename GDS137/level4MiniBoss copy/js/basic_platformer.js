@@ -6,6 +6,7 @@ var timer;
 var interval;
 var player;
 var follower;
+var following = false;
 
 
 	canvas = document.getElementById("canvas");
@@ -17,6 +18,7 @@ var follower;
 	follower.y = canvas.height/2;
 	follower.x = 500;
 	follower.color = "blue";
+	follower.force = 3;
 
 	platform0 = new GameObject();
 		platform0.width = 200;
@@ -145,26 +147,40 @@ function animate()
 	}
 	
 	
-	//---------Objective: Treasure!!!!!!!---------------------------------------------------------------------------------------------------- 
-	//---------Run this program first.
-	//---------Get Creative. Find a new way to get your player from the platform to the pearl. 
-	//---------You can do anything you would like except break the following rules:
-	//---------RULE1: You cannot spawn your player on the pearl!
-	//---------RULE2: You cannot change the innitial locations of platform0 or the goal! 
-		
-	if(player.hitTestObject(goal))
-	{
-		goal.y = 10000;
-	}
+
+
+
+		// Following Mechanics
+
+	
 	
 
 	if(player.hitTestObject(follower)){
+		following = true;
+	}
+
+	if(following == true){
 		follow();
 	}
+
 	
-	function follow()
+
+	
+	
+	platform0.drawRect();
+	platform1.drawRect();
+	platform2.drawRect();
+
+	//Show hit points
+	player.drawRect();
+	follower.drawCircle();
+	goal.drawCircle();
+}
+
+
+function follow()
 {
-	var dx = player.x - follower.x;
+	var dx = player.x - follower.x + 110;
 	var dy = player.y - follower.y;
 	
 	var dist = Math.sqrt(dx * dx + dy * dy);
@@ -176,16 +192,5 @@ function animate()
 
 	follower.x += follower.vx * 2;
 	follower.y += follower.vy * 2;
-}
-	
-	
-	platform0.drawRect();
-	platform1.drawRect();
-	platform2.drawRect();
-
-	//Show hit points
-	player.drawRect();
-	follower.drawCircle();
-	goal.drawCircle();
 }
 
