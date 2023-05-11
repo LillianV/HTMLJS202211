@@ -7,6 +7,7 @@ var interval;
 var player;
 var follower;
 var following = false;
+var health = 100;
 
 
 
@@ -22,6 +23,20 @@ var following = false;
 	follower.x = 500;
 	follower.color = "blue";
 	follower.force = 3;
+
+	healthbar1 = new GameObject();
+	healthbar1.width = 200;
+	healthbar1.height = 25;
+	healthbar1.x = 150;
+	healthbar1.y = 50;
+	healthbar1.color = "red";
+
+	healthbar2 = new GameObject();
+	healthbar2.width = 200;
+	healthbar2.height = 25;
+	healthbar2.x = 150;
+	healthbar2.y = 50;
+	healthbar2.color = "green";
 
 	platform0 = new GameObject();
 		platform0.width = 200;
@@ -154,15 +169,27 @@ function animate()
 
 		// Following Mechanics
 
-	
-	
-
 	if(player.hitTestObject(follower)){
 		following = true;
 	}
 
 	if(following == true){
 		follow();
+	}
+
+		//healthbar stuff
+
+	if(player.hitTestObject(goal)){
+		health = health-5;
+		healthbar2.width = healthbar2.width - 10;
+		player.vy = -player.vy;
+		player.vx = -player.vx;
+	}
+	if(healthbar2.width < 0){
+		healthbar2.width = 0;
+	}
+	if(health = 0){
+		
 	}
 
 	
@@ -176,6 +203,8 @@ function animate()
 	//Show hit points
 	player.drawRect();
 	follower.drawCircle();
+	healthbar1.drawRect();
+	healthbar2.drawRect();
 	goal.drawCircle();
 }
 
