@@ -189,7 +189,7 @@ function animate()
 		healthbar2.width = 0;
 	}
 	if(health = 0){
-		
+		window.reload();
 	}
 
 	
