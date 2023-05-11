@@ -187,6 +187,7 @@ function theEnd()
 	context.fillStyle = "white";
 	context.textAlign = "center";
 	context.fillText("The End", canvas.width/2, canvas.height/2);
+	
 	//---------------------------------------------INSTRUCTIONS---------------------------------------------
 	//-----------------------1. Change the current state to 4-----------------------------------------------
 	//-----------------------2. Run the program to see the end----------------------------------------------
