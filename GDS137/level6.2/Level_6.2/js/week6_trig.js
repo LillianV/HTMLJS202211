@@ -52,6 +52,11 @@ function animate()
 		pearl.x += dx /25;
 		pearl.y += dy /25;
 	}
+
+	if(pearl.y >= player.y && pearl.x >= player.x){
+		pearl.y = 10000;
+		pearl.x = 10000;
+	}
 	
 
 	
