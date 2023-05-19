@@ -14,7 +14,7 @@ var health = 100;
 	canvas = document.getElementById("canvas");
 	context = canvas.getContext("2d");	
 
-	player = new GameObject({x:100, y:canvas.height/2-100});
+	player = new GameObject({x:100, y:canvas.height/2+100});
 
 	var followPoint = player.left();
 
@@ -46,9 +46,10 @@ var health = 100;
 	
 		platform1 = new GameObject();
 		platform1.width = 500;
-		platform1.x = 1000;
+		platform1.x = 0;
 		platform1.y = canvas.height/2;
 		platform1.color = "#66ff33";
+		platform1.vx = 3;
 		
 		platform2 = new GameObject();
 		platform2.width = 500;
@@ -144,6 +145,8 @@ function animate()
 		player.vy = 0;
 	}
 	
+	
+
 	while(platform2.hitTestPoint(player.bottom()) && player.vy >=0)
 	{
 		player.y--;
@@ -193,9 +196,13 @@ function animate()
 	}
 
 	
-
-	
-	
+	if(platform1.x <= canvas.width){
+		platform1.x += platform1.vx;
+	}
+	if(platform1.x+250 <= 0){
+		platform1.x -= platform1.vx;
+	}
+		
 	platform0.drawRect();
 	platform1.drawRect();
 	platform2.drawRect();
