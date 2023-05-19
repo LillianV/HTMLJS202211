@@ -17,7 +17,7 @@ colors[0] = "#ff0000";
 colors[1] = "#00ff00";
 colors[2] = "#0000ff";
 
-var amt = 1;	
+var amt = 5;	
 var dots = [];
 
 for(var i = 0; i < amt; i++)
