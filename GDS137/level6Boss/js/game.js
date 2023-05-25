@@ -94,6 +94,15 @@ function animate() {
 				ball[i].vy = 2;
 				ball[i].color = `red`;
 			}
+			for (var i = 0; i < amt; i++) {
+				square[i] = new GameObject();
+				square[i].y = Math.random() * (-500 - 0) + 0;
+				square[i].x = Math.random() * (800 - 0) + 0;
+				square[i].width = 20;
+				square[i].height = 20;
+				square[i].vy = 2;
+				square[i].color = `green`;
+			}
 
 		}
 
@@ -124,16 +133,6 @@ function animate() {
 			turnGreen();
 			clearTimeout(hitTimer);
 			hitTimer = setTimeout(turnYellow, 500);
-
-			for (var i = 0; i < amt; i++) {
-				square[i] = new GameObject();
-				square[i].y = Math.random() * (-500 - 0) + 0;
-				square[i].x = Math.random() * (800 - 0) + 0;
-				square[i].width = 20;
-				square[i].height = 20;
-				square[i].vy = 2;
-				square[i].color = `green`;
-			}
 		}
 		if (square[i].y > 800) {
 			square[i].x = Math.random() * (800 - 0) + 0;
