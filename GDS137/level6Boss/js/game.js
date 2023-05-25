@@ -11,7 +11,7 @@ var player;
 var amt = 5;
 var ball = [];
 var square = [];
-
+var hitTimer;
 
 
 
@@ -82,6 +82,10 @@ function animate() {
 			ball[i].y = 10000;
 			console.log("colliding");
 			p1Score = 0;
+			turnRed();
+			clearTimeout(hitTimer);
+			hitTimer = setTimeout(turnYellow, 500);
+			
 		}
 
 		if (ball[i].y > 800) {
@@ -108,6 +112,10 @@ function animate() {
 			square[i].y = 10000;
 			console.log("colliding");
 			p1Score++;
+			turnGreen();
+			clearTimeout(hitTimer);
+			hitTimer = setTimeout(turnYellow, 500);
+			
 		}
 		if (square[i].y > 800) {
 			square[i].x = Math.random() * (800 - 0) + 0;
@@ -134,6 +142,17 @@ function animate() {
 	context.fillText("Score: " + p1Score, 80, 25);
 
 	player.drawRect();
+}
+
+function turnRed(){
+	player.color = "red";
+}
+
+function turnGreen(){
+	player.color = "green";
+}
+function turnYellow(){
+	player.color = "yellow";
 }
 
 
