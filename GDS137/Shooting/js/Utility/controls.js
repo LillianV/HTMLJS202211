@@ -2,7 +2,7 @@ var w = false;
 var a = false;
 var s = false;
 var d = false;
-var q = false;
+var space = false;
 
 
 document.addEventListener("keydown", press);
@@ -29,9 +29,9 @@ function press(e)
 	{
 		d = true;
 	}
-	if(e.keyCode == 81)
+	if(e.keyCode == 32)
 	{
-		q = true;
+		space = true;
 	}
 }
 
@@ -56,8 +56,8 @@ function release(e)
 	{
 		d = false;
 	}
-	if(e.keyCode == 81)
+	if(e.keyCode == 32)
 	{
-		q = false;
+		space = false;
 	}
 }
