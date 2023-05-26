@@ -45,10 +45,10 @@ healthbar2.y = 50;
 healthbar2.color = "green";
 
 basket = new GameObject();
-basket.width = 100;
-basket.height = 150;
-basket.x = 50;
-basket.y = 200;
+basket.width = 75;
+basket.height = 100;
+basket.x = 950;
+basket.y = 300;
 basket.color = "purple";
 
 platform0 = new GameObject();
@@ -109,19 +109,14 @@ function animate() {
 		player.vx += player.ax * player.force;
 		followPoint = player.left();
 	}
-	if (q && following() == true) {
+	if (q && following == true) {
+		following = false;
+
 		var dx = mouse.x - follower.x;
 		var dy = mouse.y - follower.y;
 
-		var dist = Math.sqrt(dx * dx + dy * dy);
-
-		var radians = Math.atan2(dy, dx);
-		var degrees = radians * 180 / Math.PI;
-
-		follower.angle = degrees;
-
-		follower.vx = Math.cos(radians) * follower.force;
-		follower.vy = Math.sin(radians) * follower.force;
+		follower.x += dx/5;
+		follower.y += dy/5;
 	}
 
 	player.vx *= fX;
@@ -201,8 +196,11 @@ function animate() {
 	if (following == true) {
 		follow();
 	}
-	if (follower.x == basket.x) {
+	if (follower.hitTestObject(basket)) {
 		pScore++;
+		follower.x = 10000;
+		follower.y = 10000;
+		console.log(pScore);
 	}
 
 	//healthbar stuff
