@@ -12,7 +12,6 @@ var pScore = 0;
 var mouse = { x: 0, y: 0 };
 
 
-
 canvas = document.getElementById("canvas");
 canvas.addEventListener("mousemove", track);
 canvas.addEventListener("click", shoot);
@@ -213,9 +212,6 @@ function animate() {
 	}
 	if (healthbar2.width < 0) {
 		healthbar2.width = 0;
-	}
-	if (health = 0) {
-		window.reload();
 	}
 
 
